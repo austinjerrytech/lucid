@@ -618,9 +618,26 @@ class Document
             return $this->redirect('/404');
         } else {
             ///coming back for some modifications
+            foreach ($finder as $file) {
+            $document = $file->getContents();
+            $parser = new Parser();
+            $document = $parser->parse($document);
+            $body = $document->getContent();
+            $parsedown  = new Parsedown();
+            $bd = $parsedown->text($body);
+            ////
+            preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
+            if (isset($matches)) {
+                
+                // there are images
+                foreach($matches as $image){
+                unlink("./".$image);
+                }
+            }
             unlink($this->file.$post.'.md');
             $this->createRSS();
         }
+    }
     }
 
     //get single post

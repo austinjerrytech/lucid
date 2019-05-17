@@ -361,7 +361,7 @@ class Document
                 $newItem = $Feed->createNewItem();
                 $newItem->setTitle(strip_tags($title));
                 $newItem->setLink("/post/" . strtolower($slug));
-                $newItem->setDescription(substr(strip_tags($bd), 0, 200));
+                $newItem->setDescription(substr(strip_tags($bd), 0, 100));
                 $newItem->setDate(date(\DateTime::RSS, strtotime($yaml['timestamp'])));
 
                 $newItem->setAuthor($user['name'], $user['email']);
@@ -618,26 +618,9 @@ class Document
             return $this->redirect('/404');
         } else {
             ///coming back for some modifications
-            foreach ($finder as $file) {
-            $document = $file->getContents();
-            $parser = new Parser();
-            $document = $parser->parse($document);
-            $body = $document->getContent();
-            $parsedown  = new Parsedown();
-            $bd = $parsedown->text($body);
-            ////
-            preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
-            if (isset($matches)) {
-                
-                // there are images
-                foreach($matches as $image){
-                unlink("./".$image);
-                }
-            }
             unlink($this->file.$post.'.md');
             $this->createRSS();
         }
-    }
     }
 
     //get single post

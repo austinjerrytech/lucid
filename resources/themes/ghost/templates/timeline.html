@@ -316,8 +316,8 @@
                     </a>
                       {% if feed.image %}
 
-                      <img src="{{feed.image | raw}}" alt="{{feed.title | raw}}" class="img-fluid post-image" />
-                  
+                      <img src="{{feed.image | raw}}" alt="{{feed.title | raw}}" class="img-fluid blog-image w-100" />
+
                     {% else %}
                     {% endif %}
                     <p>{{feed.desc | raw}}</p>

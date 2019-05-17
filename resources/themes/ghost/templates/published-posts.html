@@ -9,6 +9,35 @@
       font-family: 'Lato', sans-serif;
     }
 
+   .btn.btn-primary.canel-post{background-color: transparent !important; border: 1px solid red; color: red; padding: 6px 5px;}
+  .btn.btn-primary.publish-post, .btn.btn-primary.save-draft, .btn.btn-primary.add-tags{background-color: #280a66 !important; border: 1px solid #280a66; padding: 6px 5px; color: #fff;}
+
+  .main-content{padding-top: 30px; padding-bottom: 30px;}
+
+  .btn-info{background-color: #280a66 !important; border: 0 !important;}
+
+  .hide{display: none !important;}
+  .show{display: block !important;}
+
+  .form-check-label{padding-right: 10px;}
+  .mb-editor-area {
+    background: #f5f5f5;
+    border-radius: 5px;
+  }
+
+  #new-post-title{border-radius: 10px 10px 0 0 !important;}
+  .mb-editor {
+    background: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border-top: 1px !important;
+    border-bottom: 0px;
+  }
+  .ql-editor {
+      border:1px solid #ccc !important;
+  }
 
 
     /**the important was added so the styles would be forced when the titles are dynamically added**/
@@ -269,7 +298,7 @@
   </style>
 </head>
 
-<div class="container-fluid published-posts">
+<div id="content">
   {% include "navbar-auth.html" %}
   <div class="row">
     <div class=" col-12 text-right">
@@ -428,18 +457,14 @@
                       <div class="row form-group">
                         <div class="col-12" id="titleBox">
                           <label for="new-post-title" class="sr-only">Title</label>
-                          <input type="text" id="new-post-title" value="" class="form-control hide"
-                            placeholder="Title" />
+                          <input type="text" id="new-post-title" class="form-control hide" placeholder="Title"/>
+                        </div>
+                        <div class="col-12">
+                          <div id="editor">{{ post.body|raw }}</div>
                           <input type="hidden" id="postid" value="" class="form-control hide" />
                         </div>
-
-                        <div class="col-12">
-                          <div id="editor"></div>
-                        </div>
-
                       </div>
                     </div>
-
                   </div>
                   <div class="row pt-5">
                     <div class="col-12">
@@ -519,7 +544,6 @@
 
 
   </div>
-</div>
 </div>
 </div>
 </div>

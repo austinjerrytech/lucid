@@ -273,35 +273,30 @@ class Portfolio
         if (!$finder->hasResults()) {
             return $this->redirect('/404');
         } else {
+            foreach ($finder as $file) {
+                $document = $file->getContents();
+                $parser = new Parser();
+                $document = $parser->parse($document);
+                $body = $document->getContent();
+                $parsedown  = new Parsedown();
+                $bd = $parsedown->text($body);
+                ////
+                preg_match('/<img[^>]+src="((\/|\w|-)+\.[a-z]+)"[^>]*\>/i', $bd, $matches);
+                if (isset($matches)) {
+                    
+                    // there are images
+                    foreach($matches as $image){
+                    unlink("./".$image);
+                    }
+                }
             ///coming back for some modifications
             unlink($this->file . $portf . '.md');
             // $this->createRSS();
         }
     }
-
-    public function delete($id)
-    {
-        $finder = new Finder();
-        // find all files in the current directory
-        $finder->files()->in($this->file);
-        if ($finder->hasResults()) {
-            foreach ($finder as $file) {
-                $document = $file->getContents();
-                $parser = new Parser();
-                $document = $parser->parse($document);
-                $yaml = $document->getYAML();
-                $body = $document->getContent();
-                $parsedown  = new Parsedown();
-                $slug = $parsedown->text($yaml['slug']);
-                $slug = preg_replace("/<[^>]+>/", '', $slug);
-                if ($slug == $id) {
-                    unlink($file);
-                    $delete = "File deleted successfully";
-                }
-            }
-            return $delete;
-        }
     }
+
+   
 
     ///use to clean slug special chars problem solved
     public function clean($string)

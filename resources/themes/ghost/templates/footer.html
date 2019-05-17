@@ -81,12 +81,14 @@
     if($('#'+content_id).text().length > max)
     {
   
-      $('#new-post-title').addClass('form-control show');
+      //$('#new-post-title').addClass('form-control show');
+      document.getElementById('new-post-title').setAttribute('class','form-control show')
       document.getElementById("num_char").innerHTML = "Full Blog Mode";
       $(".ql-toolbar").css("display", "block");
     }else{
       $(".ql-toolbar").css("display", "none");
-      $('#new-post-title').removeClass('form-control show');
+      //$('#new-post-title').removeClass('form-control show');
+      document.getElementById('new-post-title').classList.remove("form-control show");
       document.getElementById("num_char").innerHTML = "Micro-blog Mode";
       
     }
@@ -98,11 +100,12 @@
   {
     let currentPage = window.localStorage.getItem('page');
     let issetTitle=window.localStorage.getItem('title');
-    if(currentPage == 'Edit Post')
+    if(currentPage == 'Published Posts')
     {
-      if(!issetTitle)
+      if(issetTitle)
       {
-        $('#new-post-title').addClass('form-control show');
+        //$('#new-post-title').addClass('form-control show');
+        document.getElementById('new-post-title').setAttribute('class','form-control show')
       }
      
     }

@@ -22,7 +22,7 @@
     background: #ffffff;
     border-radius: 5px;
   }
-  
+
   .ql-toolbar.ql-snow + .ql-container.ql-snow {
     border-top: 1px !important;
     border-bottom: 0px;
@@ -36,7 +36,7 @@
   background: #280a66;
   border-radius: 5px;
   }
-  
+
   /*Tag styles*/
   .tags {padding-right: 10px;}
   .btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle {
@@ -313,6 +313,12 @@
                     <a href="{{feed.link}}">
                         <h3><b>{{feed.title | raw}}</b></h3>
                     </a>
+                      {% if feed.image %}
+                    <div class="col-12 col-sm-3 col-md-3 col-lg-3">
+                      <img src="{{feed.image | raw}}" alt="{{feed.title | raw}}" class="img-fluid post-image" />
+                    </div>
+                    {% else %}
+                    {% endif %}
                     <p>{{feed.desc | raw}}</p>
                   </div>
                 </div>
